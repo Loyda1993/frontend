@@ -17,7 +17,7 @@ export default function SimpleSnackbar(props) {
     if(mostrar === false){
         setOpen(false);
     }
-  })
+  },[])
 
   return (
     <div>

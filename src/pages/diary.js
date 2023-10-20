@@ -72,7 +72,6 @@ function Diary(){
 
     const openCloseModalCreate=()=>{
         setModalCreate(!modalCreate);
-        console.log('redireccionar')
     }
 
     const openCloseModalDelete=()=>{

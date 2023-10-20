@@ -77,7 +77,6 @@ function TypeProduct(props){
 
     const {typeLoading, typeError, typeData} = useQuery(GET_ALL_TYPE_PRODUCT,{
         onCompleted: (queryData) =>{
-            console.log(queryData)
             const productArray = queryData.getAllTypeProduct;
             setTypeProductData(productArray);
         }

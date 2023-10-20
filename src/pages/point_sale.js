@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {AuthContext } from '../context/authContext'
 import { useMutation, useQuery } from "@apollo/react-hooks";
 
@@ -88,6 +88,21 @@ function PointSale(props){
         }
     });
 
+    useEffect(()=>{
+
+        /**Errores GQL ------------------------------------------------------------------- */
+        if (error) {
+            let isArray = Array.isArray(error);
+            if(!isArray){
+                navigate('/');
+                return;
+            }
+            setErrors(error);
+        }
+        
+        
+    },[data, error])
+
     const {typeLoading, typeError, typeData} = useQuery(GET_ALL_PRODUCT,{
         onError({ graphQLErrors }){
             setErrors(graphQLErrors);
@@ -97,6 +112,11 @@ function PointSale(props){
             setAllProductData(productArray);
         }
     });
+
+    useEffect(()=>{ 
+        if (typeLoading) return null;
+        if (typeError) setErrors(typeError);
+    },[typeError, typeData])
 
     //Mutaciones ------------------------------------------------------------------------
     function funCreateProducto()
@@ -350,19 +370,6 @@ function PointSale(props){
             openCloseModalAdd();
         }
     })
-    /**Errores GQL ------------------------------------------------------------------- */
-    if (loading) return null;
-    if (error) {
-        let isArray = Array.isArray(error);
-        if(!isArray){
-            navigate('/');
-            return;
-        }
-        setErrors(error);
-    }
-    
-    if (typeLoading) return null;
-    if (typeError) setErrors(typeError);
 
     //Modales--------------------------------------------------------------------------
     const openCloseModalCreate=()=>{

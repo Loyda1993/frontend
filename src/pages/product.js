@@ -423,7 +423,9 @@ function Product(props){
         <TextField label="Buscar por nombre" value={filtro} onChange={handleFiltroChange} />
     );
     return (
-    <>
+ 
+        <>
+        
         {errors?.map(function(error){
                 return(
                     <Alert severity="error">
@@ -432,6 +434,7 @@ function Product(props){
                 )
             })}
         <div>
+
         <Container spacing={4} maxWidth="md">
         {mostrarSnackBar.mostrar && (
             <SimpleSnackbar onClose={closeSnackBars} objeto={mostrarSnackBar} />
