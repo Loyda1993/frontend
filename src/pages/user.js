@@ -456,7 +456,7 @@ function User(props){
             <br/>
             <TextField name="correo" className="inputMaterial" label="cuenta" onChange={handleChange}/> <br/>
             <br/>
-            <TextField name="contrasena" className="inputMaterial" label="contraseña" onChange={handleChange}/> <br/>
+            <TextField required type="password" name="contrasena" className="inputMaterial" label="contraseña" onChange={handleChange}/> <br/>
             <br/>
             <div align="right">
             <Stack direction="row" spacing={2} justifyContent="flex-end">
