@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AppBar, Box, Toolbar, Typography, Button, Tooltip, Divider, Avatar, IconButton, Stack, BottomNavigation, BottomNavigationAction } from "@mui/material";
+import { AppBar, Box, Toolbar, Typography, Button, Tooltip, Divider, Modal } from "@mui/material";
 import {MenuItem, Menu} from '@mui/material';
 
 import { Link, useNavigate } from "react-router-dom";
@@ -7,12 +7,22 @@ import FaceIcon from '@mui/icons-material/Face';
 import {AuthContext } from '../context/authContext'
 import { useContext } from "react";
 
-import ResponsiveDrawer from './drawer';
+import PasswordIcon from '@mui/icons-material/Password';
+import LogoutIcon from '@mui/icons-material/Logout';
+import ChangePassword from './modals/chancePassword';
 
 function NavBar() {
     let navigate = useNavigate();
+    const [mostrarModal, setMostrarModal ] = React.useState(false);
     const { user, logout} = useContext(AuthContext);
 
+    const modalPassword = () => {
+        setMostrarModal(!mostrarModal);
+    }
+
+    const respuestModal = (valor) => {
+        setMostrarModal(valor)
+    }
     const onLogout = () => {
         logout();
         navigate('/');
@@ -29,6 +39,7 @@ function NavBar() {
     };
 
     return (
+        <>
         <Box sx={{ flexGrow: 1}}>
             <AppBar position="static">
                 <Toolbar>
@@ -79,7 +90,14 @@ function NavBar() {
                     <Box alignItems="right" sx={{flexGrow: 1, textAlign: "right"}}>
                         {user ? 
                         <>
-                        <Button style={{textDecoration: "none", color:"white"}} onClick={onLogout}>Salir</Button>
+                        <Tooltip title="Cambio de contraseña">
+                            <PasswordIcon sx={{margin: "10px"}} onClick={modalPassword} fontSize='medium'/>
+                        </Tooltip>
+                        <Tooltip title="Salir del sistema">
+                            <LogoutIcon sx={{margin: "10px"}} onClick={onLogout} fontSize='medium'/>
+                        </Tooltip>
+                        {/* <Button style={{textDecoration: "none", color:"white"}} onClick={onLogout}>Salir</Button>
+                        <Button style={{textDecoration: "none", color:"white"}} onClick={onLogout}>Salir</Button> */}
                         </>
                         :
                         <>
@@ -94,6 +112,17 @@ function NavBar() {
                 </Toolbar>
             </AppBar>
         </Box>
+   
+        
+    
+        <Modal
+            open={mostrarModal}
+            onClose={modalPassword}>
+            {<div> <ChangePassword mostrar={respuestModal}></ChangePassword>
+                </div>}
+            {/* {<ChangePassword mostrar={respuestModal}></ChangePassword>} */}
+        </Modal>
+    </>
     )
 }
 

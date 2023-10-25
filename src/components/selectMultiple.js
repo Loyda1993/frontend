@@ -32,7 +32,7 @@ function getStyles(name, personName, theme) {
 }
 
 export default function MultipleSelectChip(props) {
-    const { datos, onChange, seleccionados } = props;
+    const { datos, myOnChange, seleccionados } = props;
 
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
@@ -51,7 +51,6 @@ export default function MultipleSelectChip(props) {
         const {
             target: { value },
         } = event;
-        
         setPersonName(
         // On autofill we get a stringified value.
             typeof value === 'string' ? value.split(',') : value,
@@ -59,8 +58,8 @@ export default function MultipleSelectChip(props) {
     };
 
     React.useEffect(()=>{
-      onChange(personName)
-    },[])
+      myOnChange(personName)
+    },[personName])
 
   return (
     <div>

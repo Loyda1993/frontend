@@ -313,6 +313,7 @@ function User(props){
             puntos_venta: pointSaleSelected
         },
         onCompleted: (data) => {
+            console.log({data})
             var resultado = data.createPointSaleUser;
             var usuario = [{
                 codigo: productoSeleccionado.codigo,
@@ -424,10 +425,6 @@ function User(props){
     }
 
     const seleccionarProducto=(producto, caso)=>{
-        // let tipo = typeProductData.find((valor)=> valor.codigo === producto.tipo_producto);
-       
-        // setTipoSeleccionado(tipo);
-
         setProductoSeleccionado(producto);
         if (caso == 'Editar') {
             setModalEdit(true)
@@ -558,7 +555,7 @@ function User(props){
             <h3>Agregar accesos a {productoSeleccionado.nombre}</h3>
             <Alert severity="info">En esta ventana agrega los puntos de venta a los que tendra acceso el usuario.</Alert>
             <br/>
-            <MultipleSelectChip datos={pointSaleData} onChange={handlePointSaleChange} seleccionados={productoSeleccionado.punto_venta}></MultipleSelectChip>
+            <MultipleSelectChip datos={pointSaleData} myOnChange={handlePointSaleChange} seleccionados={productoSeleccionado.punto_venta}></MultipleSelectChip>
             <br/>
             {/* <misPuntosVentaPorUsuario codigo={productoSeleccionado.codigo}></misPuntosVentaPorUsuario> */}
             <br/>
@@ -584,7 +581,7 @@ function User(props){
             <h3>Agregar roles a {productoSeleccionado.nombre}</h3>
             <Alert severity="info">En esta ventana agrega los roles al usuario. Esto indicara que acciones podra realizar el usuario.</Alert>
             <br/>
-            <MultipleSelectChip datos={typeRolData} onChange={handleTypeRolChange} seleccionados={productoSeleccionado.roles}></MultipleSelectChip>
+            <MultipleSelectChip datos={typeRolData} myOnChange={handleTypeRolChange} seleccionados={productoSeleccionado.roles}></MultipleSelectChip>
             <br/>
             {/* <misPuntosVentaPorUsuario codigo={productoSeleccionado.codigo}></misPuntosVentaPorUsuario> */}
             <br/>
